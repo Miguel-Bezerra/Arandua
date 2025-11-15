@@ -1,0 +1,574 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: url("../img/Fundo-certo.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Container central */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+}
+
+/* Header com logo e título */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  width: 90px;
+  height: 90px;
+  background-color: #b36a1f;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.title {
+  font-size: 40px;
+  color: white;
+  font-weight: bold;
+  font-family: 'CocoBikeR', sans-serif;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px #e9cdad, 0 0 20px #e9cdad, 0 0 30px #e9cdad;                                        
+}
+
+/* Caixa translúcida */
+.login-box {
+  margin-top: 20px;
+  background-color: rgb(169, 140, 107, 0.95);
+  padding: 30px;
+  border-radius: 15px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-box h2 {
+  color: #b36a1f;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Campos de entrada */
+.login-box label {
+  color: #b36a1f;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.login-box input {
+  background-color: #b36a1f;
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.login-box input:focus {
+  outline: none;
+}
+/* Botão */
+.login-box button {
+  background-color: #b36a1f;
+  border: none;
+  color: #e9cdad;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  text-shadow: 0 0 10px #e9cdad, 0 0 20px #e9cdad, 0 0 30px #e9cdad;
+}
+
+.login-box button:hover {
+  background-color: #8c4f15;
+}
+
+.submit-eye {
+              position:absolute;
+              top:5px; right:0;
+              z-index:10;
+              border:none;
+              background:transparent;
+              outline:none;
+            }
+
+            .submit-line {
+              position: relative;
+              /*width: 600px;*/
+            }
+
+            .submit-line input {
+              width: 100%;
+            }
+            /* ===== RESPONSIVIDADE ===== */
+
+/* Tablets (768px a 1024px) */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 180px;
+    }
+    
+    .content {
+        padding: 25px 30px 40px 30px;
+    }
+    
+    .logo-area {
+        padding: 15px;
+        font-size: 18px;
+    }
+    
+    .nav-links li a.nav-link {
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+    
+    .topbar {
+        padding: 10px 15px;
+    }
+    
+    .search-container {
+        max-width: 400px;
+    }
+    
+    .chat-item.message-bubble {
+        padding: 15px;
+    }
+    
+    .profile-form {
+        margin: 20px auto;
+        padding: 25px;
+    }
+}
+
+/* Tablets Pequenos e Smartphones Grandes (576px a 768px) */
+@media (max-width: 768px) {
+    #app-wrapper {
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        padding: 0;
+    }
+    
+    .logo-area {
+        padding: 15px;
+        height: auto;
+    }
+    
+    .nav-links {
+        display: flex;
+        margin: 0;
+        flex-grow: 0;
+    }
+    
+    .nav-links li {
+        flex: 1;
+    }
+    
+    .nav-links li a.nav-link {
+        padding: 15px 10px;
+        text-align: center;
+        border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .nav-links li a.active {
+        border-right: none;
+        border-bottom: 4px solid var(--bubble-bg);
+    }
+    
+    .sidebar-footer {
+        display: none;
+    }
+    
+    .main-content-area {
+        flex-grow: 1;
+    }
+    
+    .content {
+        padding: 20px;
+    }
+    
+    .topbar {
+        padding: 8px 15px;
+        height: auto;
+        min-height: 60px;
+    }
+    
+    .search-container {
+        max-width: 300px;
+    }
+    
+    .user-btn {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    
+    /* Ajustes no modal */
+    .modal-content {
+        margin: 20px;
+        padding: 20px;
+        width: calc(100% - 40px);
+    }
+    
+    /* Ajustes no perfil */
+    .profile-form {
+        margin: 15px auto;
+        padding: 20px;
+    }
+    
+    .back-button {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+}
+
+/* Smartphones (375px a 576px) */
+@media (max-width: 576px) {
+    .sidebar {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .logo-area {
+        justify-content: center;
+        padding: 10px 15px;
+    }
+    
+    .nav-links {
+        width: 100%;
+    }
+    
+    .nav-links li a.nav-link {
+        padding: 12px 5px;
+        font-size: 14px;
+    }
+    
+    .topbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+        height: auto;
+    }
+    
+    .search-container {
+        max-width: 100%;
+        order: 2;
+    }
+    
+    .user-area {
+        order: 1;
+        align-self: flex-end;
+    }
+    
+    .content {
+        padding: 15px;
+    }
+    
+    .chat-item.message-bubble {
+        margin-bottom: 15px;
+        padding: 15px;
+        border-radius: 15px;
+    }
+    
+    .avatar {
+        width: 35px;
+        height: 35px;
+        margin-right: 8px;
+    }
+    
+    .avatar svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .username {
+        font-size: 16px;
+    }
+    
+    .message-text {
+        font-size: 15px;
+    }
+    
+    /* FAB Button para mobile */
+    .fab-button {
+        width: 50px;
+        height: 50px;
+        font-size: 30px;
+        bottom: 20px;
+        right: 20px;
+        line-height: 50px;
+    }
+    
+    /* Modal adjustments */
+    .modal-content {
+        margin: 10px;
+        padding: 15px;
+        width: calc(100% - 20px);
+    }
+    
+    .modal-content h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    
+    #postContent {
+        min-height: 120px;
+        font-size: 16px;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .modal-actions .user-btn {
+        width: 100%;
+    }
+    
+    /* Profile page adjustments */
+    .profile-form {
+        margin: 10px auto;
+        padding: 15px;
+    }
+    
+    .profile-form h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .image-upload-section {
+        padding: 15px;
+    }
+    
+    .image-preview-container img {
+        width: 120px;
+        height: 120px;
+    }
+    
+    /* Dropdown adjustments */
+    .dropdown-menu {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
+        border-radius: 15px 15px 0 0;
+        max-height: 50vh;
+        overflow-y: auto;
+    }
+    
+    .dropdown-menu ul {
+        padding: 10px 0;
+    }
+    
+    .dropdown-menu li a {
+        padding: 15px 20px;
+        font-size: 16px;
+    }
+}
+
+/* Smartphones Muito Pequenos (até 375px) */
+@media (max-width: 375px) {
+    .content {
+        padding: 10px;
+    }
+    
+    .logo-area {
+        padding: 8px 10px;
+    }
+    
+    .app-title {
+        font-size: 16px;
+    }
+    
+    .nav-links li a.nav-link {
+        padding: 10px 5px;
+        font-size: 13px;
+    }
+    
+    .chat-item.message-bubble {
+        padding: 12px;
+    }
+    
+    .profile-form {
+        padding: 12px;
+    }
+    
+    .profile-form label {
+        margin-bottom: 15px;
+    }
+    
+    .profile-form input {
+        padding: 10px;
+    }
+    
+    .user-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+}
+
+/* ===== MELHORIAS DE ACESSIBILIDADE E UX ===== */
+
+/* Melhorar visibilidade do hover em dispositivos touch */
+@media (hover: none) and (pointer: coarse) {
+    .user-btn:hover,
+    .nav-link:hover,
+    .deleta-post:hover {
+        transform: none;
+    }
+    
+    .fab-button:hover {
+        transform: scale(1);
+    }
+}
+
+/* Ajustes para orientação landscape em smartphones */
+@media (max-width: 768px) and (orientation: landscape) {
+    .sidebar {
+        flex-direction: row;
+        height: 60px;
+    }
+    
+    .logo-area {
+        flex: 0 0 auto;
+    }
+    
+    .nav-links {
+        flex: 1;
+    }
+    
+    .content {
+        padding: 15px;
+    }
+    
+    .dropdown-menu {
+        max-height: 40vh;
+    }
+}
+
+/* Prevenir zoom em inputs em iOS */
+@media (max-width: 576px) {
+    input,
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+}
+
+/* Melhorar scroll em mobile */
+@media (max-width: 768px) {
+    html {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    body {
+        overflow-x: hidden;
+    }
+}
+
+/* Ajustes para dark mode se necessário */
+@media (prefers-color-scheme: dark) {
+    /* Manter seu tema atual, mas adicionar ajustes se quiser suporte a dark mode */
+}
+
+/* ===== ANIMAÇÕES SUAVES PARA TRANSFORMAÇÕES ===== */
+.sidebar,
+.main-content-area,
+.chat-item.message-bubble,
+.modal-content,
+.profile-form {
+    transition: all 0.3s ease;
+}
+
+/* ===== UTILITÁRIOS RESPONSIVOS ===== */
+.hidden-mobile {
+    display: block;
+}
+
+.hidden-desktop {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .hidden-mobile {
+        display: none !important;
+    }
+    
+    .hidden-desktop {
+        display: block !important;
+    }
+}
+
+/* Melhorar legibilidade em telas pequenas */
+@media (max-width: 576px) {
+    body {
+        line-height: 1.4;
+    }
+    
+    .message-text {
+        line-height: 1.4;
+    }
+}
+
+/* Ajustes específicos para a tela de login/cadastro */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .login-box,
+    .cadast-box {
+        padding: 20px;
+    }
+    
+    .header {
+        margin-bottom: 20px;
+    }
+    
+    .logo {
+        width: 60px;
+        height: 60px;
+        font-size: 16px;
+    }
+    
+    .title {
+        font-size: 24px;
+    }
+}
+
+/* Ajustes para a tela sobre */
+@media (max-width: 768px) {
+    .about-card {
+        padding: 25px;
+        margin: 20px;
+    }
+    
+    .about-card p {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+}

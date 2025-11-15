@@ -1,0 +1,1052 @@
+:root{
+  /* New Arandua Brown Theme based on image */
+  --primary-brown: #906040; /* Darker brown, sidebar/header primary */
+  --secondary-brown: #A07850; /* Sidebar links/accents, Primary button background */
+  --bubble-bg: #EAD8C1; /* Light tan/beige for message bubbles */
+  
+  --text-dark: #333333; /* Text color on light backgrounds (bubbles, main content) */
+  --text-light: #FFFFFF; /* Text color on dark backgrounds (sidebar, topbar) */
+  --text-muted: #666666; /* Muted text for preview/placeholder on light BG */
+  
+  --bg-color: #D2B48C; /* Main body background color, light brown */
+
+  /* Override previous dark settings */
+  --bg-overlay: rgba(0,0,0,0.6); 
+  --glass: rgba(255,255,255,0.06);
+  --text: var(--text-dark); /* Default text color */
+  --muted: var(--text-muted); 
+  
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+html,body{
+  height:100%;
+  margin:0;
+  background:var(--bg-color); 
+  color:var(--text); 
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.bg-layer{
+  position:fixed;
+  inset:0;
+  background-image: url('../img/Fundo-certo.jpg');
+  background-size:cover;
+  background-position:center;
+  /* Keep opacity relatively low to allow --bg-color to tint the look */
+  opacity:0.25; 
+  pointer-events:none;
+  z-index:0;
+  mix-blend-mode: multiply; /* Helps blend the dark image into the brown background */
+}
+
+/* --- Layout Structure --- */
+
+#app-wrapper {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+  z-index: 5;
+}
+
+.sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  background: var(--primary-brown);
+  color: var(--text-light);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+}
+
+.main-content-area {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-area {
+  /* Used for Arandua title inside sidebar top */
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap; 
+  height: 60px; /* Matching top bar height visually */
+  box-sizing: border-box;
+}
+
+.logo-circle {
+  /* Logo circle styling from image */
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--primary-brown); /* Same color as sidebar for blending */
+  border: 2px solid var(--text-light);
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 30px 0 0 0;
+  flex-grow: 1;
+}
+
+.nav-links li a.nav-link {
+  display: block;
+  padding: 12px 20px;
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.nav-links li a.active {
+  background: var(--secondary-brown);
+  border-right: 4px solid var(--bubble-bg);
+}
+
+.sidebar-footer {
+  padding: 0 20px;
+}
+
+.sidebar-footer .nav-link {
+  display: block;
+  padding: 12px 0;
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+
+/* --- Top Bar (Search & User Button) --- */
+
+.topbar{
+  position: sticky;
+  top: 0;
+  display:flex;
+  gap: 20px;
+  align-items:center;
+  justify-content: flex-end; 
+  padding: 10px 20px;
+  background: var(--primary-brown);
+  border-bottom: none;
+  z-index:10;
+  height: 60px;
+  box-sizing: border-box;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  background: #fff; /* White background for input area */
+  border-radius: 20px; 
+  padding: 0;
+  flex-grow: 1;
+  max-width: 500px;
+}
+.user-area {
+  position: relative;
+}
+
+.search-container input{
+  width: 100%;
+  padding: 8px 15px;
+  border-radius: 20px 0 0 20px;
+  border: none;
+  background: transparent;
+  color: var(--text-dark);
+  outline: none;
+  font-size: 15px;
+}
+.search-container input::placeholder{ color: var(--text-muted); }
+
+.search-icon-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-dark);
+  padding: 0 10px;
+  height: 100%;
+  cursor: pointer;
+}
+.search-container > .search-icon-btn svg {
+    display: block;
+}
+
+.user-btn{
+  padding:12px 20px; 
+  border-radius: 5px; 
+  border: none;
+  font-weight:700;
+  cursor:pointer;
+  white-space: nowrap;
+}
+
+.user-btn.primary {
+  background: var(--secondary-brown); 
+  color: var(--text-light);
+}
+
+.user-btn.secondary {
+  background: #eee;
+  color: var(--text-dark);
+}
+
+/* Dropdown Menu Styling */
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Position below the button */
+  right: 0;
+  margin-top: 5px; /* Small gap */
+  background: white; /* Contrast with the dark topbar */
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  min-width: 180px;
+  z-index: 20; /* Above topbar and content */
+  overflow: hidden;
+  color: var(--text-dark);
+}
+
+.dropdown-menu.hidden {
+  display: none;
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: var(--text-dark);
+  font-size: 15px;
+  transition: background-color 0.2s;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f0f0f0;
+}
+
+
+/* --- Main Content Area --- */
+
+.content{
+  padding: 30px 50px 50px 50px; 
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto; /* Center content within the main area */
+}
+
+
+/* --- Message Bubbles Styling --- */
+
+.chat-item.message-bubble {
+  margin-bottom: 25px;
+  background: var(--bubble-bg);
+  padding: 20px;
+  border-radius: 20px;
+  border-top-left-radius: 5px; 
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  position: relative; /* Added: enable absolute positioning for delete button */
+  padding-bottom: 40px; /* Increased padding to accommodate button at the bottom right */
+}
+
+.bubble-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: flex-start; /* Modified: button moved out of header */
+}
+
+.user-info-group {
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--primary-brown);
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+}
+
+.avatar svg {
+  width: 20px;
+  height: 20px;
+  color: white; 
+}
+
+.username {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text-dark);
+  display: inline;
+}
+
+/* New style for delete button - Positioned at bottom right */
+.delete-post-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 5px;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s, color 0.2s;
+  width: auto;
+  height: auto;
+  font-size: 0; /* Hide potential residual text, rely on SVG */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+/* Ensure SVG content is visible */
+.delete-post-btn svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+}
+
+.delete-post-btn:hover {
+  opacity: 1;
+  color: #c9302c; /* Red color on hover */
+}
+
+.message-text {
+  color: var(--text-dark);
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.message-image {
+  margin-top: 15px;
+  display: inline-block; /* To contain floated image if applicable, or just structure */
+}
+
+.message-image img {
+  max-width: 200px; /* Limit image size based on reference */
+  height: auto;
+  border-radius: 10px;
+  display: block;
+}
+
+/* Floating Action Button (FAB) */
+.fab-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--secondary-brown);
+  color: var(--text-light);
+  font-size: 36px;
+  font-weight: 300;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  line-height: 60px;
+  text-align: center;
+  padding: 0;
+}
+
+/* --- Modal Overlay for Post Creation --- */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal-content {
+  background: var(--bubble-bg);
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.hidden .modal-content {
+  transform: translateY(20px);
+}
+
+.modal-content h2 {
+  color: var(--primary-brown);
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+#postForm {
+  display: flex;
+  flex-direction: column;
+}
+
+#postContent {
+  width: 100%;
+  min-height: 150px;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+  resize: vertical;
+  background: #fff;
+  color: var(--text-dark);
+}
+
+.image-input-area {
+  margin-bottom: 15px;
+}
+
+.image-upload-label {
+  cursor: pointer;
+  display: inline-block;
+  /* inherits padding/styling from .user-btn */
+  transition: background 0.2s;
+}
+
+.image-preview-container {
+  position: relative;
+  margin-bottom: 15px;
+  max-width: 200px;
+  border: 1px dashed var(--text-muted);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.image-preview-container img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 3px;
+}
+
+.remove-image-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--primary-brown);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  padding: 0;
+  cursor: pointer;
+  font-size: 16px;
+  transform: translate(50%, -50%);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+
+/* Profile specific form styling */
+.profile-form {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background: var(--bubble-bg); 
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  color: var(--text-dark);
+}
+
+.profile-form label {
+  display: block;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.profile-form input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+  color: var(--text-dark);
+  background: #fff;
+}
+
+/* Remove deprecated styles */
+.chat-section {
+  /* Placeholder for previous content, now managed by new structure */
+  display: none; 
+}
+
+/* New Styles for About Page */
+.content.about-page-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Use min-height: 100% of the container size minus topbar height */
+  min-height: calc(100vh - 80px); 
+  padding: 30px 50px; 
+}
+
+.about-card {
+  background: var(--primary-brown);
+  color: var(--text-light);
+  padding: 40px;
+  border-radius: 20px;
+  border-top-left-radius: 5px; /* Mimic the chat bubble corner design direction */
+  max-width: 700px;
+  width: 100%; 
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.about-card p {
+  line-height: 1.8;
+  font-size: 17px;
+  margin-bottom: 20px;
+}
+
+.back-arrow {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-light);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.15); 
+    padding: 2px;
+    transition: background 0.2s;
+}
+.back-arrow:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+.back-arrow svg {
+    width: 20px;
+    height: 20px;
+}
+.about-text-content {
+    margin-top: 15px; 
+}
+
+/* Remove deprecated styles */
+.chat-section {
+  /* Placeholder for previous content, now managed by new structure */
+  display: none; 
+}
+
+.chat-section h2, .chat-item, .username, .preview-text {
+    /* Ensure old styles are overridden or unused */
+    padding: initial;
+    margin: initial;
+    border: initial;
+}
+/* Specifically hide old structural elements used only previously */
+.divider, .about-section, .about-content {
+  display: none !important;
+}
+/* ===== RESPONSIVIDADE ===== */
+
+/* Tablets (768px a 1024px) */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 180px;
+    }
+    
+    .content {
+        padding: 25px 30px 40px 30px;
+    }
+    
+    .logo-area {
+        padding: 15px;
+        font-size: 18px;
+    }
+    
+    .nav-links li a.nav-link {
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+    
+    .topbar {
+        padding: 10px 15px;
+    }
+    
+    .search-container {
+        max-width: 400px;
+    }
+    
+    .chat-item.message-bubble {
+        padding: 15px;
+    }
+    
+    .profile-form {
+        margin: 20px auto;
+        padding: 25px;
+    }
+}
+
+/* Tablets Pequenos e Smartphones Grandes (576px a 768px) */
+@media (max-width: 768px) {
+    #app-wrapper {
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    
+    .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        padding: 0;
+    }
+    
+    .logo-area {
+        padding: 15px;
+        height: auto;
+    }
+    
+    .nav-links {
+        display: flex;
+        margin: 0;
+        flex-grow: 0;
+    }
+    
+    .nav-links li {
+        flex: 1;
+    }
+    
+    .nav-links li a.nav-link {
+        padding: 15px 10px;
+        text-align: center;
+        border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .nav-links li a.active {
+        border-right: none;
+        border-bottom: 4px solid var(--bubble-bg);
+    }
+    
+    .sidebar-footer {
+        display: none;
+    }
+    
+    .main-content-area {
+        flex-grow: 1;
+    }
+    
+    .content {
+        padding: 20px;
+    }
+    
+    .topbar {
+        padding: 8px 15px;
+        height: auto;
+        min-height: 60px;
+    }
+    
+    .search-container {
+        max-width: 300px;
+    }
+    
+    .user-btn {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    
+    /* Ajustes no modal */
+    .modal-content {
+        margin: 20px;
+        padding: 20px;
+        width: calc(100% - 40px);
+    }
+    
+    /* Ajustes no perfil */
+    .profile-form {
+        margin: 15px auto;
+        padding: 20px;
+    }
+    
+    .back-button {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+}
+
+/* Smartphones (375px a 576px) */
+@media (max-width: 576px) {
+    .sidebar {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .logo-area {
+        justify-content: center;
+        padding: 10px 15px;
+    }
+    
+    .nav-links {
+        width: 100%;
+    }
+    
+    .nav-links li a.nav-link {
+        padding: 12px 5px;
+        font-size: 14px;
+    }
+    
+    .topbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+        height: auto;
+    }
+    
+    .search-container {
+        max-width: 100%;
+        order: 2;
+    }
+    
+    .user-area {
+        order: 1;
+        align-self: flex-end;
+    }
+    
+    .content {
+        padding: 15px;
+    }
+    
+    .chat-item.message-bubble {
+        margin-bottom: 15px;
+        padding: 15px;
+        border-radius: 15px;
+    }
+    
+    .avatar {
+        width: 35px;
+        height: 35px;
+        margin-right: 8px;
+    }
+    
+    .avatar svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .username {
+        font-size: 16px;
+    }
+    
+    .message-text {
+        font-size: 15px;
+    }
+    
+    /* FAB Button para mobile */
+    .fab-button {
+        width: 50px;
+        height: 50px;
+        font-size: 30px;
+        bottom: 20px;
+        right: 20px;
+        line-height: 50px;
+    }
+    
+    /* Modal adjustments */
+    .modal-content {
+        margin: 10px;
+        padding: 15px;
+        width: calc(100% - 20px);
+    }
+    
+    .modal-content h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+    
+    #postContent {
+        min-height: 120px;
+        font-size: 16px;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .modal-actions .user-btn {
+        width: 100%;
+    }
+    
+    /* Profile page adjustments */
+    .profile-form {
+        margin: 10px auto;
+        padding: 15px;
+    }
+    
+    .profile-form h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .image-upload-section {
+        padding: 15px;
+    }
+    
+    .image-preview-container img {
+        width: 120px;
+        height: 120px;
+    }
+    
+    /* Dropdown adjustments */
+    .dropdown-menu {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
+        border-radius: 15px 15px 0 0;
+        max-height: 50vh;
+        overflow-y: auto;
+    }
+    
+    .dropdown-menu ul {
+        padding: 10px 0;
+    }
+    
+    .dropdown-menu li a {
+        padding: 15px 20px;
+        font-size: 16px;
+    }
+}
+
+/* Smartphones Muito Pequenos (até 375px) */
+@media (max-width: 375px) {
+    .content {
+        padding: 10px;
+    }
+    
+    .logo-area {
+        padding: 8px 10px;
+    }
+    
+    .app-title {
+        font-size: 16px;
+    }
+    
+    .nav-links li a.nav-link {
+        padding: 10px 5px;
+        font-size: 13px;
+    }
+    
+    .chat-item.message-bubble {
+        padding: 12px;
+    }
+    
+    .profile-form {
+        padding: 12px;
+    }
+    
+    .profile-form label {
+        margin-bottom: 15px;
+    }
+    
+    .profile-form input {
+        padding: 10px;
+    }
+    
+    .user-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+}
+
+/* ===== MELHORIAS DE ACESSIBILIDADE E UX ===== */
+
+/* Melhorar visibilidade do hover em dispositivos touch */
+@media (hover: none) and (pointer: coarse) {
+    .user-btn:hover,
+    .nav-link:hover,
+    .deleta-post:hover {
+        transform: none;
+    }
+    
+    .fab-button:hover {
+        transform: scale(1);
+    }
+}
+
+/* Ajustes para orientação landscape em smartphones */
+@media (max-width: 768px) and (orientation: landscape) {
+    .sidebar {
+        flex-direction: row;
+        height: 60px;
+    }
+    
+    .logo-area {
+        flex: 0 0 auto;
+    }
+    
+    .nav-links {
+        flex: 1;
+    }
+    
+    .content {
+        padding: 15px;
+    }
+    
+    .dropdown-menu {
+        max-height: 40vh;
+    }
+}
+
+/* Prevenir zoom em inputs em iOS */
+@media (max-width: 576px) {
+    input,
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+}
+
+/* Melhorar scroll em mobile */
+@media (max-width: 768px) {
+    html {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    body {
+        overflow-x: hidden;
+    }
+}
+
+/* Ajustes para dark mode se necessário */
+@media (prefers-color-scheme: dark) {
+    /* Manter seu tema atual, mas adicionar ajustes se quiser suporte a dark mode */
+}
+
+/* ===== ANIMAÇÕES SUAVES PARA TRANSFORMAÇÕES ===== */
+.sidebar,
+.main-content-area,
+.chat-item.message-bubble,
+.modal-content,
+.profile-form {
+    transition: all 0.3s ease;
+}
+
+/* ===== UTILITÁRIOS RESPONSIVOS ===== */
+.hidden-mobile {
+    display: block;
+}
+
+.hidden-desktop {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .hidden-mobile {
+        display: none !important;
+    }
+    
+    .hidden-desktop {
+        display: block !important;
+    }
+}
+
+/* Melhorar legibilidade em telas pequenas */
+@media (max-width: 576px) {
+    body {
+        line-height: 1.4;
+    }
+    
+    .message-text {
+        line-height: 1.4;
+    }
+}
+
+/* Ajustes específicos para a tela de login/cadastro */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .login-box,
+    .cadast-box {
+        padding: 20px;
+    }
+    
+    .header {
+        margin-bottom: 20px;
+    }
+    
+    .logo {
+        width: 60px;
+        height: 60px;
+        font-size: 16px;
+    }
+    
+    .title {
+        font-size: 24px;
+    }
+}
+
+/* Ajustes para a tela sobre */
+@media (max-width: 768px) {
+    .about-card {
+        padding: 25px;
+        margin: 20px;
+    }
+    
+    .about-card p {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+}

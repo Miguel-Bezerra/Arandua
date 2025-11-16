@@ -4,7 +4,6 @@ import db from "../config/bd.js"
 const rotas = Router()
 
 // ===== ROTAS DE USUÁRIO =====
-// (Mantidas iguais - não precisam de alteração)
 rotas.post("/usuarios", (req, res) => {
     const { nome, senha, email, ft_perfil } = req.body
 

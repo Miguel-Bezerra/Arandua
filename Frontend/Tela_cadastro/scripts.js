@@ -1,4 +1,4 @@
-// scripts.js - CORRIGIDO para cadastro - VERSÃO FINAL
+// scripts.js
 const API_URL = "https://seu-backend.railway.app";
 
 document.addEventListener("DOMContentLoaded", () => {
